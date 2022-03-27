@@ -1,0 +1,15 @@
+RewriteEngine On
+RewriteCond $1 !^(index\.php|(.*)\.swf|forums|images|css|downloads|jquery|js|robots\.txt|favicon\.ico)
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ ./index.php?$1 [L,QSA]
+
+
+ErrorDocument 400 /errors.php
+ErrorDocument 403 /errors.php
+ErrorDocument 404 /errors.php
+ErrorDocument 405 /errors.php
+ErrorDocument 408 /errors.php
+ErrorDocument 500 /errors.php
+ErrorDocument 502 /errors.php
+ErrorDocument 504 /errors.php

@@ -1,0 +1,146 @@
+body{font-family: 'Roboto', sans-serif;}
+a:hover{text-decoration:none;}
+.error{color:red;}
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6{font-family: 'Roboto', sans-serif;}
+.goog-te-gadget span{display:none;}
+
+.register-header{
+	font-size: 23px;
+}
+
+.modal-popup{
+	overflow: auto!important;
+}
+
+.login-button{
+	font-size:12px;
+}
+
+.des a{
+	color:#fff;
+}
+
+.table-transaction{
+	overflow-x:auto;
+}
+
+.bottom-footer{
+	text-align:right;
+}
+
+#update-form{
+	background-color: #eae7e7;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.form-width{
+	    margin: 77px 0px 0px 0px;
+}
+
+.education-qua   {
+	margin: 46px 0px 12px 16px;
+	}
+	
+.add-button{
+	    background-color: #f36969;
+    color: #fff;
+}
+
+.add-button1{
+	background-color: #f36969;
+	 color: #fff;
+text-align: center;
+  width: 91px;
+    padding: 12px 0px 9px 0px;
+
+}
+
+.card-resume{
+	height:440px;
+}
+
+.font-icon{
+	color:#f36969;
+	padding:0px 6px 0px 0px;
+}
+
+.download-resume{
+	    padding: 12px 0px 0px 0px;
+}
+
+.profile-date{
+	color:#0e1427 !important;
+}
+.job-title{
+	padding: 0px 0px 3px 1px !important;
+}
+.card-plan{
+	height: 450px !important;
+}
+.buy-button{
+	   width: 98px;
+    background-color: black;
+    color: white;
+    padding: 8px 10px 8px 7px;
+ 
+    border-radius: 10pa;
+    border-radius: 12px;
+    position: absolute;
+    bottom: 31px;
+}
+.button-position{
+	    margin: 45px 0px 0px 7px !important;
+		text-align:left !important;
+}
+
+.button-position1{
+	    margin: 45px 0px 0px 57px !important;
+		text-align:left !important;
+} 
+
+.buy-button:hover{
+	  
+        color: #fff;
+    background: #f36969;
+  
+}
+
+@media only screen and (max-width: 900px){
+	.single-resume .resume-aside .resume-links {
+    line-height: 1.5em;
+    list-style: none outside;
+    padding: 5px 0px 6px 0px;
+    margin: 0px 2px 0px 12px;
+    overflow: hidden;
+    zoom: 1;
+    float: left;
+    max-width: 100%;
+}
+.single-resume .meta li {
+  
+    /* padding: 0.5em; */
+    padding: 2px 0px 13px 0px;
+   color:#0e1427;
+}
+.job-title{
+	padding: 0px 0px 3px 1px !important;
+}
+
+.location-section{
+	padding: 0px 0px 0px 1px;
+}
+
+.button-position{
+	    margin: 45px 0px 0px 91px !important;
+		text-align:left !important;
+}
+
+.button-position1{
+	    margin: 45px 0px 0px 100px !important;
+		text-align:left !important;
+} 
+.card-plan {
+    height: auto!important;
+}
+
+}

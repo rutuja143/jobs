@@ -1,0 +1,361 @@
+ALTER TABLE `user` CHANGE `is_admin` `is_admin` TINYINT(1) NOT NULL DEFAULT '1' COMMENT '1:admin ;2:candidiate;3:employer';
+
+
+CREATE TABLE `email_log` (
+ `id` bigint(20) NOT NULL AUTO_INCREMENT,
+ `from_address` varchar(255) NOT NULL,
+ `to_address` varchar(255) NOT NULL,
+ `cc_address` varchar(255) NOT NULL,
+ `bcc_address` varchar(255) NOT NULL,
+ `subject` varchar(255) NOT NULL,
+ `message` text NOT NULL,
+ `mail_date` datetime NOT NULL,
+ `attachment` varchar(255) NOT NULL,
+ `refrence_url` varchar(255) NOT NULL,
+ `reason` varchar(255) NOT NULL,
+ `status` varchar(255) NOT NULL COMMENT '1:notsend;2:send',
+ PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1
+
+
+//////19/10/2019
+ALTER TABLE `candidate` ADD `resume_title` VARCHAR(255) NOT NULL AFTER `designation`, ADD `resume` VARCHAR(255) NOT NULL AFTER `resume_title`, ADD `notice_period` INT(11) NOT NULL AFTER `resume`, ADD `additional_info` VARCHAR(255) NOT NULL AFTER `notice_period`, ADD `additional_skill` VARCHAR(255) NOT NULL AFTER `additional_info`;
+ALTER TABLE `candidate` CHANGE `industry` `division` INT(11) NOT NULL;
+ALTER TABLE `career` DROP `date`;
+ALTER TABLE `course` CHANGE `id` `id` INT(11) NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `career` ADD `from_date` VARCHAR(255) NOT NULL AFTER `status`, ADD `to_date` VARCHAR(255) NOT NULL AFTER `from_date`, ADD `till_date` TINYINT(1) NOT NULL AFTER `to_date`;
+
+ALTER TABLE `candidate` ADD `is_authorized` TINYINT(1) NOT NULL AFTER `division`, ADD `primary_language` INT(11) NOT NULL AFTER `is_authorized`;
+
+/*added by yuvraj 19/10/2019 */
+
+CREATE TABLE `employer_packages` (
+ `id` int(11) NOT NULL AUTO_INCREMENT,
+ `package_name` varchar(255) NOT NULL,
+ `status` tinyint(1) NOT NULL DEFAULT '1' COMMENT '1 active 2 inactive 3 trash',
+ `price` bigint(200) NOT NULL,
+ PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1
+
+/*added by rutuja 21/10/2019 */
+
+ALTER TABLE `jobs` CHANGE `description` `description` TEXT CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL;
+
+-- phpMyAdmin SQL Dump
+-- version 4.2.11
+-- http://www.phpmyadmin.net
+--
+-- Host: 127.0.0.1
+-- Generation Time: Oct 22, 2019 at 11:36 PM
+-- Server version: 5.6.21
+-- PHP Version: 5.6.3
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+
+--
+-- Database: `falconjobsnet`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `candidate_job`
+--
+
+CREATE TABLE IF NOT EXISTS `candidate_job` (
+`id` int(11) NOT NULL,
+  `created_date` datetime NOT NULL,
+  `created_by` int(11) NOT NULL,
+  `job_id` int(11) NOT NULL,
+  `candidate_id` int(11) NOT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `candidate_job`
+--
+
+INSERT INTO `candidate_job` (`id`, `created_date`, `created_by`, `job_id`, `candidate_id`, `status`) VALUES
+(1, '2019-10-23 02:57:15', 36, 8, 36, 1),
+(2, '2019-10-23 03:01:13', 36, 8, 36, 1);
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `candidate_job`
+--
+ALTER TABLE `candidate_job`
+ ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `candidate_job`
+--
+ALTER TABLE `candidate_job`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+/* Added by rutuja 23/10/2019  Permission Table*/
+-- phpMyAdmin SQL Dump
+-- version 4.2.11
+-- http://www.phpmyadmin.net
+--
+-- Host: 127.0.0.1
+-- Generation Time: Oct 24, 2019 at 03:41 AM
+-- Server version: 5.6.21
+-- PHP Version: 5.6.3
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+
+--
+-- Database: `falconjobsnet`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `permission`
+--
+
+CREATE TABLE IF NOT EXISTS `permission` (
+`id` int(11) NOT NULL,
+  `created_date` datetime NOT NULL,
+  `created_by` int(11) NOT NULL,
+  `modified_date` datetime NOT NULL,
+  `modified_by` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT '1' COMMENT '1:active,2:inactive'
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `permission`
+--
+
+INSERT INTO `permission` (`id`, `created_date`, `created_by`, `modified_date`, `modified_by`, `name`, `status`) VALUES
+(1, '2019-10-23 00:00:00', 0, '0000-00-00 00:00:00', 0, 'candidate_view', 1),
+(2, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00', 0, 'candidate_update', 1),
+(3, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00', 0, 'candidate_insert', 1),
+(4, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00', 0, 'candidate_delete', 1),
+(5, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00', 0, 'job_view', 1),
+(6, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00', 0, 'job_update', 1),
+(7, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00', 0, 'job_insert', 1),
+(8, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00', 0, 'job_delete', 1),
+(9, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00', 0, 'employee_view', 1),
+(10, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00', 0, 'employee_update', 1),
+(11, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00', 0, 'employee_insert', 1),
+(12, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00', 0, 'employee_delete', 1),
+(13, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00', 0, 'employer_view', 1),
+(14, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00', 0, 'employer_update', 1),
+(15, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00', 0, 'employer_insert', 1),
+(16, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00', 0, 'employer_delete', 1),
+(17, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00', 0, 'admin_job_add', 1),
+(18, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00', 0, 'admin_job_view', 1),
+(19, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00', 0, 'admin_job_update', 1),
+(20, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00', 0, 'admin_job_delete', 1),
+(21, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00', 0, 'admin_candidate_add', 1),
+(22, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00', 0, 'admin_candidate_view', 1),
+(23, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00', 0, 'admin_candidate_update', 1),
+(24, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00', 0, 'admin_candidate_delete', 1),
+(25, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00', 0, 'admin_employer_add', 1),
+(26, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00', 0, 'admin_employer_view', 1),
+(27, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00', 0, 'admin_employer_update', 1),
+(28, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00', 0, 'admin_employer_delete', 1),
+(29, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00', 0, 'admin_employee_add', 1),
+(30, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00', 0, 'admin_employee_view', 1),
+(31, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00', 0, 'admin_employee_update', 1),
+(32, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00', 0, 'admin_employee_delete', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `permission_map`
+--
+
+CREATE TABLE IF NOT EXISTS `permission_map` (
+`id` int(11) NOT NULL,
+  `created_date` datetime NOT NULL,
+  `created_by` int(11) NOT NULL,
+  `permission_id` int(11) NOT NULL,
+  `role_id` int(11) NOT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT '1' COMMENT '1:active 2:inactive',
+  `user_id` int(11) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `permission_map`
+--
+
+INSERT INTO `permission_map` (`id`, `created_date`, `created_by`, `permission_id`, `role_id`, `status`, `user_id`) VALUES
+(1, '0000-00-00 00:00:00', 0, 1, 1, 1, 0),
+(2, '0000-00-00 00:00:00', 0, 2, 1, 1, 0),
+(3, '0000-00-00 00:00:00', 0, 3, 1, 1, 0),
+(4, '0000-00-00 00:00:00', 0, 4, 2, 1, 0),
+(5, '0000-00-00 00:00:00', 0, 5, 2, 1, 0),
+(6, '0000-00-00 00:00:00', 0, 6, 1, 1, 0),
+(7, '0000-00-00 00:00:00', 0, 7, 1, 1, 0);
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `permission`
+--
+ALTER TABLE `permission`
+ ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `permission_map`
+--
+ALTER TABLE `permission_map`
+ ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `permission`
+--
+ALTER TABLE `permission`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=33;
+--
+-- AUTO_INCREMENT for table `permission_map`
+--
+ALTER TABLE `permission_map`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+
+23/10/2019
+code review issue
+all function name
+remove unnecessary functions
+remove unnecessary views
+
+issue 1
+page mgmt ctrl ln no 104
+
+admin panel access give to rutuja
+
+issue 2
+why division` and desgnation 2 tables
+
+/* added by rutuja 24/10/2019  */
+ALTER TABLE `division` CHANGE `status` `status` INT(11) NOT NULL DEFAULT '1' COMMENT '1:active ;2:inactive;3:trash';
+
+/* added by yuvraj 24 10 2019*/
+ALTER TABLE `countries` ADD `c_ph_code` VARCHAR(255) NOT NULL AFTER `name`;
+ALTER TABLE `division` ADD `candidate_count` INT(11) NOT NULL AFTER `status`;
+ALTER TABLE `designation` ADD `candidate_count` INT(11) NOT NULL AFTER `name`;
+
+
+/*     added by rutuja 25/10/2019 */
+ALTER TABLE `employee` DROP `password`;
+-- phpMyAdmin SQL Dump
+-- version 4.2.11
+-- http://www.phpmyadmin.net
+--
+-- Host: 127.0.0.1
+-- Generation Time: Oct 25, 2019 at 02:26 PM
+-- Server version: 5.6.21
+-- PHP Version: 5.6.3
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+
+--
+-- Database: `falconjobsnet`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `candidate_package`
+--
+
+CREATE TABLE IF NOT EXISTS `candidate_package` (
+`id` int(11) NOT NULL,
+  `package_name` varchar(255) NOT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT '1' COMMENT '1:active 2:inactive',
+  `price` bigint(200) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `candidate_package`
+--
+
+INSERT INTO `candidate_package` (`id`, `package_name`, `status`, `price`) VALUES
+(1, '10 Usd for 1 month', 1, 800),
+(2, '20 usd for 3 months', 1, 1250);
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `candidate_package`
+--
+ALTER TABLE `candidate_package`
+ ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `candidate_package`
+--
+ALTER TABLE `candidate_package`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+================= 27 10 2019
+ALTER TABLE `jobs` ADD `employer_name` VARCHAR(255) NOT NULL AFTER `title`;
+ALTER TABLE `candidate` ADD `mobile_number_country_code` VARCHAR(255) NOT NULL AFTER `phone_number`;
+
+ALTER TABLE `candidate` ADD `current_salary` BIGINT(20) NOT NULL AFTER `additional_skill`, ADD `expected_salary` BIGINT(20) NOT NULL AFTER `current_salary`;
+
+=-=========30/10/2019=====
+ALTER TABLE `qualification` ADD `passing _year` VARCHAR(10) NOT NULL AFTER `university`;
+
+===========31/10/2019===============
+
+ALTER TABLE `candidate` CHANGE `additional_info` `additional_info` TEXT CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL, CHANGE `additional_skill` `additional_skill` TEXT CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL;
+
+
+==============1/11/2019==================
+
+ALTER TABLE `candidate` CHANGE `notice_period` `notice_period` INT(11) NULL;
